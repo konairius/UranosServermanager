@@ -1,9 +1,10 @@
 import random
 import string
 from time import sleep
-from Common.exceptions import InvalidCommandStateError, ExecutableNotFoundError
+from Common.exceptions import InvalidCommandStateError, ExecutableNotFoundError, InvalidCommandNameError
 from Common.models import User, Time, CommandResult
 from Common.untils import execute_subprocess
+from UptimeManager.models import WOLCommand
 
 __author__ = 'konsti'
 
@@ -53,8 +54,12 @@ class TestClassCommandResult(unittest.TestCase):
         self.assertRaises(InvalidCommandStateError, result.set_state, 'invalid_state')
 
 
-class TestClassCommand(unittest.TestCase):
-    pass
+class TestClassWOLCommand(unittest.TestCase):
+    def test_create(self):
+        name = 'wake'
+        cmd = WOLCommand(name)
+        self.assertEqual(cmd.name, name)
+        self.assertRaises(InvalidCommandNameError, WOLCommand, name)
 
 
 class TestGlobalUtilFunctions(unittest.TestCase):
