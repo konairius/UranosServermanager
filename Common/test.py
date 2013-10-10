@@ -1,0 +1,71 @@
+import random
+import string
+from time import sleep
+from Common.exceptions import InvalidCommandStateError, ExecutableNotFoundError
+from Common.models import User, Time, CommandResult
+from Common.untils import execute_subprocess
+
+__author__ = 'konsti'
+
+import unittest
+
+
+def string_generator(size=6, chars=string.ascii_letters+string.digits):
+    #noinspection PyUnusedLocal
+    return ''.join(random.choice(chars) for x in range(size))
+
+
+class TestClassUser(unittest.TestCase):
+
+    def test_create(self):
+        User.reset_users()
+        name = 'Konstantin Renner'
+        user = User(name)
+        self.assertEqual(str(user), name)
+        self.assertEqual(user.id, User(name).id - 1)
+
+    def test_mass_create(self):
+        User.reset_users()
+        size = 10000
+        users = dict()
+        for i in range(size):
+            users[i] = User(string_generator())
+        for i in range(len(users)):
+            self.assertEqual(i, users[i].id-1)
+
+
+class TestClassTime(unittest.TestCase):
+
+    def test_create(self):
+        time = Time.now()
+        sleep(1)
+        self.assertLess(time, Time.now())
+
+
+class TestClassCommandResult(unittest.TestCase):
+
+    valid_states = ['unknown', 'successful', 'failed', 'running']
+
+    def test_create(self):
+        result = CommandResult()
+        for state in self.valid_states:
+            result.set_state(state)
+        self.assertRaises(InvalidCommandStateError, result.set_state, 'invalid_state')
+
+
+class TestClassCommand(unittest.TestCase):
+    pass
+
+
+class TestGlobalUtilFunctions(unittest.TestCase):
+
+    @staticmethod
+    def test_execute_existing_subprocess():
+        execute_subprocess(['ls', '-l'])
+
+    def test_execute_nonexistent_subprocess(self):
+        self.assertRaises(ExecutableNotFoundError, execute_subprocess, ['asdfghj', '-ds'])
+
+
+if __name__ == '__main__':
+    unittest.main()
