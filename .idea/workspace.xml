@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d320bce-c3d1-4d3a-ad67-95a5ef3f727a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Uranos Servermanager.iml" afterPath="$PROJECT_DIR$/.idea/Uranos Servermanager.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/test.py" afterPath="$PROJECT_DIR$/Common/test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Common/networking.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Common/models.py" afterPath="$PROJECT_DIR$/Common/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Uranos Servermanager.iws" />
@@ -31,7 +30,7 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UptimeManager/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
+            <state line="7" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="126" max-vertical-offset="288">
               <folding />
             </state>
           </provider>
@@ -40,7 +39,7 @@
       <file leaf-file-name="untils.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/untils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="9" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="288">
+            <state line="9" column="9" selection-start="338" selection-end="338" vertical-scroll-proportion="0.0" vertical-offset="162" max-vertical-offset="306">
               <folding />
             </state>
           </provider>
@@ -49,8 +48,19 @@
       <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="45" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="3348">
+            <state line="181" column="0" selection-start="4553" selection-end="4553" vertical-scroll-proportion="0.0" vertical-offset="2476" max-vertical-offset="3384">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="networking.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Common/networking.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="0" selection-start="567" selection-end="567" vertical-scroll-proportion="0.43612334" vertical-offset="0" max-vertical-offset="908">
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,16 +68,16 @@
       <file leaf-file-name="exceptions.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/exceptions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="936">
+            <state line="34" column="0" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="936">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="test.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Common/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="42" selection-start="1222" selection-end="1222" vertical-scroll-proportion="0.013136289" vertical-offset="802" max-vertical-offset="1494">
+            <state line="58" column="21" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.0" vertical-offset="566" max-vertical-offset="1476">
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -83,9 +93,15 @@
     </FindUsagesManager>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Konstantin Renner" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
     <option name="myDateState">
       <MyDateState />
     </option>
@@ -95,11 +111,12 @@
       <list>
         <option value="$PROJECT_DIR$/Common/Tests.py" />
         <option value="$PROJECT_DIR$/Common/tests.py" />
-        <option value="$PROJECT_DIR$/Common/models.py" />
         <option value="$PROJECT_DIR$/Common/exceptions.py" />
         <option value="$PROJECT_DIR$/Common/untils.py" />
-        <option value="$PROJECT_DIR$/Common/test.py" />
         <option value="$PROJECT_DIR$/UptimeManager/models.py" />
+        <option value="$PROJECT_DIR$/Common/test.py" />
+        <option value="$PROJECT_DIR$/Common/models.py" />
+        <option value="$PROJECT_DIR$/Common/networking.py" />
       </list>
     </option>
   </component>
@@ -178,11 +195,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -370,6 +387,15 @@
       <created>1380844350497</created>
       <updated>1380844350497</updated>
     </task>
+    <task id="LOCAL-00001" summary="Added test for WOLCommand creation">
+      <created>1381444352015</created>
+      <updated>1381444352015</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added IPConnection as Baseclass for network Communication&#10;">
+      <created>1381921898062</created>
+      <updated>1381921898062</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -394,22 +420,23 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-4" width="1857" height="1085" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21664888" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3391877" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3290735" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18395196" sideWeight="0.67022413" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1260917" sideWeight="0.68089646" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1260917" sideWeight="0.6709265" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3191035" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3191035" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39829606" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -419,9 +446,16 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="Added test for WOLCommand creation" />
+    <MESSAGE value="Added IPConnection as Baseclass for network Communication&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added IPConnection as Baseclass for network Communication&#10;" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -436,15 +470,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Common/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="73" selection-start="1786" selection-end="1786" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1296">
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Common/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="0" selection-start="1368" selection-end="1368" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="2808">
@@ -507,20 +532,6 @@
         <state line="36" column="0" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.7977528" vertical-offset="222" max-vertical-offset="756" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Common/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="118" column="45" selection-start="2995" selection-end="2995" vertical-scroll-proportion="0.0" vertical-offset="1620" max-vertical-offset="3348">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Common/exceptions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="936">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UptimeManager/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
@@ -537,9 +548,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Common/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="42" selection-start="1222" selection-end="1222" vertical-scroll-proportion="0.013136289" vertical-offset="802" max-vertical-offset="1494">
+        <state line="58" column="21" selection-start="1616" selection-end="1616" vertical-scroll-proportion="0.0" vertical-offset="566" max-vertical-offset="1476">
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="0" selection-start="681" selection-end="681" vertical-scroll-proportion="0.0" vertical-offset="26" max-vertical-offset="936">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="181" column="0" selection-start="4553" selection-end="4553" vertical-scroll-proportion="0.0" vertical-offset="2476" max-vertical-offset="3384">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Common/networking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="567" selection-end="567" vertical-scroll-proportion="0.43612334" vertical-offset="0" max-vertical-offset="908">
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 from datetime import datetime
-from ipaddress import ip_address
 from Common.exceptions import InvalidUserIdError, InvalidCommandStateError, InvalidCommandNameError
 
 __author__ = 'konsti'
@@ -177,23 +176,6 @@ class RecurringJob(Job):
                 return Time.never()
             time += self._interval
         return time
-
-
-class IPConnection(object, metaclass=ABCMeta):
-    """
-    This a wrapper to enable abstract network communication,
-    specific communication methods MUST inherit from it
-    """
-    _ip = None
-    _service_port = None
-
-    def __init__(self, ip: ip_address, port: int):
-        self._ip = ip
-        self._service_port = port
-
-    @abstractmethod
-    def execute(self, command: Command) -> CommandResult:
-        pass
 
 
 class Computer(object):
