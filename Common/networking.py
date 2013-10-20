@@ -40,18 +40,18 @@ class SSHKey(object):
     Container class for an ssh key
     """
 
-    def __init__(self, public, private: str='', key_type: str='ssh-rsa'):
+    def __init__(self, public: str='', private: str='', key_type: str='ssh-rsa'):
         self._public = public
         self._private = private
         self._key_type = key_type
 
     @property
     def public(self) -> str:
-        return self.public
+        return self._public
 
     @property
     def private(self) -> str:
-        return self.private
+        return self._private
 
     @property
     def key_type(self) -> str:
@@ -60,7 +60,7 @@ class SSHKey(object):
     @property
     def private_file(self) -> mmap:
         data = mmap(-1, len(self.private))
-        data.write(self.private)
+        data.write(bytes(self.private, 'UTF-8'))
         return data
 
 
