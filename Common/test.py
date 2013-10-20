@@ -69,7 +69,7 @@ class TestGlobalUtilFunctions(unittest.TestCase):
         execute_subprocess(['ls', '-l'])
 
     def test_execute_nonexistent_subprocess(self):
-        self.assertRaises(ExecutableNotFoundError, execute_subprocess, ['asdfghj', '-ds'])
+        self.assertRaises(ExecutableNotFoundError, execute_subprocess, ['not_existing_command', '-ds'])
 
 
 if __name__ == '__main__':
