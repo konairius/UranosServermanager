@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from ipaddress import ip_address
+from mmap import mmap
 from paramiko import SSHClient, PKey
 from Common.models import Command, CommandResult
 
@@ -45,16 +46,22 @@ class SSHKey(object):
         self._key_type = key_type
 
     @property
-    def public(self):
+    def public(self) -> str:
         return self.public
 
     @property
-    def private(self):
+    def private(self) -> str:
         return self.private
 
     @property
-    def key_type(self):
+    def key_type(self) -> str:
         return self._key_type
+
+    @property
+    def private_file(self) -> mmap:
+        data = mmap(-1, len(self.private))
+        data.write(self.private)
+        return data
 
 
 class SSHConnection(IPConnection):
@@ -79,12 +86,21 @@ class SSHConnection(IPConnection):
         self._user_key = user_key
         self._host_key = host_key
 
+    @property
+    def _ipstr(self):
+        return self._ip.compressed
+
     def _get_open_ssh_client(self) -> SSHClient:
         client = SSHClient()
-        client.get_host_keys().add(self._ip.compressed, self._host_key.key_type, PKey(data=self._host_key.public))
+        client.get_host_keys().clear()
+        client.get_host_keys().add(self._ipstr, self._host_key.key_type, PKey(data=self._host_key.public))
+        client.connect(hostname=self._ipstr,
+                       port=self._service_port,
+                       username=self._username,
+                       password='',
+                       pkey=PKey.from_private_key(self._user_key.private_file),
+                       look_for_keys=False)
         return client
 
     def execute(self, command: Command) -> CommandResult:
         pass
-
-
