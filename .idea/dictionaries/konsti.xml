@@ -1,7 +1,14 @@
 <component name="ProjectDictionaryState">
   <dictionary name="konsti">
     <words>
+      <w>autoconfig</w>
       <w>etherwake</w>
+      <w>hostkey</w>
+      <w>ipstr</w>
+      <w>openssh</w>
+      <w>paramiko</w>
+      <w>pathext</w>
+      <w>tempfile</w>
       <w>uranos</w>
     </words>
   </dictionary>
