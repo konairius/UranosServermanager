@@ -1,7 +1,13 @@
+import random
+import string
 import subprocess
 from Common.exceptions import ExecutableNotFoundError
 
 __author__ = 'konsti'
+
+
+def get_random_string(length: int=20) -> str:
+    return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
 
 
 def execute_subprocess(command: list):
