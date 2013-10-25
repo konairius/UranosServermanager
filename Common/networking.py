@@ -5,6 +5,11 @@ from Common.models import Command, CommandResult
 __author__ = 'konsti'
 
 
+class Computer(object):
+    def __init__(self, hostname: str, ip: str='', network: str=''):
+        pass
+
+
 class Connection(object, metaclass=ABCMeta):
     """
     Baseclass for all connection wrappers,

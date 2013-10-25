@@ -176,10 +176,3 @@ class RecurringJob(Job):
                 return Time.never()
             time += self._interval
         return time
-
-
-class Computer(object):
-    def __init__(self, hostname: str, ip: str='', network: str=''):
-        pass
-
-        #TODO: This should be the class that is used do describe the target of commands, it should also contain auth information
