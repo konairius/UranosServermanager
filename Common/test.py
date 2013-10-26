@@ -11,13 +11,11 @@ __author__ = 'konsti'
 import unittest
 
 
-def string_generator(size=6, chars=string.ascii_letters+string.digits):
-    #noinspection PyUnusedLocal
-    return ''.join(random.choice(chars) for x in range(size))
+def string_generator(size=6, chars=string.ascii_letters + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 class TestClassUser(unittest.TestCase):
-
     def test_create(self):
         User.reset_users()
         name = 'Konstantin Renner'
@@ -32,11 +30,10 @@ class TestClassUser(unittest.TestCase):
         for i in range(size):
             users[i] = User(string_generator())
         for i in range(len(users)):
-            self.assertEqual(i, users[i].id-1)
+            self.assertEqual(i, users[i].id - 1)
 
 
 class TestClassTime(unittest.TestCase):
-
     def test_create(self):
         time = Time.now()
         sleep(1)
@@ -44,7 +41,6 @@ class TestClassTime(unittest.TestCase):
 
 
 class TestClassCommandResult(unittest.TestCase):
-
     valid_states = ['unknown', 'successful', 'failed', 'running']
 
     def test_create(self):
@@ -63,14 +59,12 @@ class TestClassWOLCommand(unittest.TestCase):
 
 
 class TestGlobalUtilFunctions(unittest.TestCase):
-
     @staticmethod
     def test_execute_existing_subprocess():
         execute_subprocess(['ls', '-l'])
 
     def test_execute_nonexistent_subprocess(self):
-        self.assertRaises(ExecutableNotFoundError, execute_subprocess, ['asdfghj', '-ds'])
-
+        self.assertRaises(ExecutableNotFoundError, execute_subprocess, ['not_existing_command', '-ds'])
 
 if __name__ == '__main__':
     unittest.main()
