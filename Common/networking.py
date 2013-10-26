@@ -1,12 +1,16 @@
 from abc import ABCMeta, abstractmethod
-from ipaddress import ip_address
+from netaddr import EUI, IPAddress
 from Common.models import Command, CommandResult
 
 __author__ = 'konsti'
 
 
+def get_mac_address(ip: IPAddress) -> EUI:
+    pass
+
+
 class Computer(object):
-    def __init__(self, hostname: str, ip: str='', network: str=''):
+    def __init__(self, host):
         pass
 
 

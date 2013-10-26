@@ -1,7 +1,6 @@
 import random
 import string
 from time import sleep
-from Common.exceptions import InvalidCommandStateError, ExecutableNotFoundError, InvalidCommandNameError
 from Common.models import User, Time, CommandResult
 from Common.untils import execute_subprocess
 from UptimeManager.models import WOLCommand
@@ -47,7 +46,7 @@ class TestClassCommandResult(unittest.TestCase):
         result = CommandResult()
         for state in self.valid_states:
             result.set_state(state)
-        self.assertRaises(InvalidCommandStateError, result.set_state, 'invalid_state')
+        self.assertRaises(RuntimeError, result.set_state, 'invalid_state')
 
 
 class TestClassWOLCommand(unittest.TestCase):
@@ -55,7 +54,7 @@ class TestClassWOLCommand(unittest.TestCase):
         name = 'wake'
         cmd = WOLCommand(name)
         self.assertEqual(cmd.name, name)
-        self.assertRaises(InvalidCommandNameError, WOLCommand, name)
+        self.assertRaises(KeyError, WOLCommand, name)
 
 
 class TestGlobalUtilFunctions(unittest.TestCase):
@@ -64,7 +63,8 @@ class TestGlobalUtilFunctions(unittest.TestCase):
         execute_subprocess(['ls', '-l'])
 
     def test_execute_nonexistent_subprocess(self):
-        self.assertRaises(ExecutableNotFoundError, execute_subprocess, ['not_existing_command', '-ds'])
+        self.assertRaises(OSError, execute_subprocess, ['not_existing_command', '-ds'])
+
 
 if __name__ == '__main__':
     unittest.main()

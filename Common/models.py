@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 from datetime import datetime
-from Common.exceptions import InvalidUserIdError, InvalidCommandStateError, InvalidCommandNameError
 
 __author__ = 'konsti'
 
@@ -23,7 +22,7 @@ class User(object):
     @classmethod
     def add_user(cls, user):
         if user.id in cls._users.keys():
-            raise InvalidUserIdError(
+            raise KeyError(
                 'The UserId %(id)i is already given to %(current)s' % {'id': user.id, 'current': cls._users[user.id]})
         cls._users[user.id] = user
 
@@ -94,7 +93,7 @@ class CommandResult(object):
 
     def set_state(self, new_state: ['unknown', 'successful', 'failed', 'running']):
         if not new_state in ['unknown', 'successful', 'failed', 'running']:
-            raise InvalidCommandStateError('%(state)s is not a valid State.' % {'state': new_state})
+            raise RuntimeError('%(state)s is not a valid State.' % {'state': new_state})
         self._state = new_state
 
 
@@ -118,7 +117,7 @@ class Command(metaclass=ABCMeta):
         # It really should be Command._commands not cls._commands
         # because commands a cached globally.
         if command.name in Command._commands.keys():
-            raise InvalidCommandNameError('The Command %(name)s already exists' % {'name': command.name})
+            raise KeyError('The Command %(name)s already exists' % {'name': command.name})
         Command._commands[command.name] = command
 
     @abstractmethod

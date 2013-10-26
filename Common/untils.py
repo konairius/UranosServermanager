@@ -2,7 +2,6 @@ import random
 from shutil import which
 import string
 import subprocess
-from Common.exceptions import ExecutableNotFoundError
 
 __author__ = 'konsti'
 
@@ -15,5 +14,5 @@ def execute_subprocess(command: list):
     if not which(command[0]) is None:
         subprocess.call(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     else:
-        raise ExecutableNotFoundError(
+        raise OSError(
             'The program %(command)s is not installed on your computer.' % {'command': command[0]})

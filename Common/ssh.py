@@ -1,7 +1,6 @@
 from ipaddress import ip_address
 from shutil import which
 import tempfile
-from Common.exceptions import ExecutableNotFoundError
 from Common.models import Command, CommandResult
 from Common.networking import IPConnection
 
@@ -47,7 +46,7 @@ class SSHKey(object):
 def find_ssh_executable(ssh_name: str='ssh') -> str:
     path = which(ssh_name)
     if path is None:
-        raise ExecutableNotFoundError('The ssh executable was not found.')
+        raise OSError('The ssh executable was not found.')
     return path
 
 

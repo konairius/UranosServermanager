@@ -1,4 +1,5 @@
-from Common.models import Command, Computer
+from Common.models import Command
+from Common.networking import Computer
 from Common.untils import execute_subprocess
 
 __author__ = 'konsti'
