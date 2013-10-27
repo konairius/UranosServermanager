@@ -4,6 +4,7 @@ from ipaddress import ip_address
 from locale import getlocale
 import re
 from subprocess import Popen, PIPE
+from warnings import warn
 from Common.models import Command, CommandResult
 
 __author__ = 'konsti'
@@ -58,9 +59,19 @@ class Computer(object):
         """
         @host Can be either the hostname or the ipaddress
         """
-        self.ip = ip_address(gethostbyname(host))
         self.host = host
-        self.mac = get_mac_address(self.ip)
+        try:
+            self.mac = get_mac_address(self.ip)
+        except KeyError:
+            warn('MAC Address could not be determined, you will have to set it manually for some Commands to work',
+                 RuntimeWarning)
+
+    @property
+    def ip(self):
+        try:
+            return ip_address(gethostbyname(self.host))
+        except TimeoutError:
+            return ip_address('0.0.0.0')
 
 
 class Connection(object, metaclass=ABCMeta):
