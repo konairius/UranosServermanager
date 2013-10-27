@@ -60,6 +60,7 @@ class Computer(object):
         @host Can be either the hostname or the ipaddress
         """
         self.host = host
+        self.last_ip = self.ip
         try:
             self.mac = get_mac_address(self.ip)
         except KeyError:
@@ -68,10 +69,22 @@ class Computer(object):
 
     @property
     def ip(self):
+        """
+        Tries to give you the current ip of the host,
+        if it could not be determined, the latest known ip is returned.
+        """
         try:
             return ip_address(gethostbyname(self.host))
         except TimeoutError:
-            return ip_address('0.0.0.0')
+            return self.last_ip
+
+    @property
+    def status(self):
+        try:
+            ping(self.ip)
+            return 'UP'
+        except StopIteration:
+            return 'DOWN'
 
 
 class Connection(object, metaclass=ABCMeta):
