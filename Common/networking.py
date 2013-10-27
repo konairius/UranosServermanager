@@ -1,3 +1,4 @@
+from _socket import gethostbyname
 from abc import ABCMeta, abstractmethod
 from ipaddress import ip_address
 from locale import getlocale
@@ -50,8 +51,16 @@ def get_mac_address(ip: ip_address) -> str:
 
 
 class Computer(object):
-    def __init__(self, hostname):
-        self.hostname = hostname
+    def __repr__(self):
+        return 'Computer: %(hostname)s(%(ip)s, %(mac)s)' % {'hostname': self.host, 'ip': self.ip, 'mac': self.mac}
+
+    def __init__(self, host: str):
+        """
+        @host Can be either the hostname or the ipaddress
+        """
+        self.ip = ip_address(gethostbyname(host))
+        self.host = host
+        self.mac = get_mac_address(self.ip)
 
 
 class Connection(object, metaclass=ABCMeta):
