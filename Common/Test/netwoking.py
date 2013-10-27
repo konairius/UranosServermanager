@@ -16,6 +16,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_get_mac_address(self):
         self.assertEqual(get_mac_address(self.target_ip), self.target_mac)
+        self.assertRaises(KeyError, get_mac_address, ip_address('127.0.0.1'))
 
 
 if __name__ == '__main__':

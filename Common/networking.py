@@ -30,9 +30,11 @@ def _get_mac_from_arp(ip: ip_address) -> str:
     """
     pid = Popen(['arp', '-n', str(ip)], stdout=PIPE)
     s = pid.communicate()[0].decode(getlocale()[1])
+    if not 'HWaddress' in s:
+        raise KeyError('%(ip)s is not in arp Table' % {'ip': ip})
     mac = re.search(r"(([a-f\d]{1,2}:){5}[a-f\d]{1,2})", s).groups()[0]
     if mac == '':
-        raise KeyError('{ip}s is not in arp Table' % {'ip': ip})
+        raise KeyError('%(ip)s is not in arp Table' % {'ip': ip})
     return mac
 
 
@@ -48,8 +50,8 @@ def get_mac_address(ip: ip_address) -> str:
 
 
 class Computer(object):
-    def __init__(self, host):
-        pass
+    def __init__(self, hostname):
+        self.hostname = hostname
 
 
 class Connection(object, metaclass=ABCMeta):
