@@ -8,11 +8,13 @@ from Common.models import Command, CommandResult
 __author__ = 'konsti'
 
 
-def ping(ip: ip_address, count: int=1) -> float:
+def ping(ip: ip_address, count: int=1, sync: bool=False) -> dict:
     """
     Generator for a dict containing the output of ping in a usable fashion
     """
     pid = Popen(['ping', '-c ' + str(count), str(ip)], stdout=PIPE)
+    if sync:
+        pid.wait()
     while True:
         next_line = pid.stdout.readline().decode(getlocale()[1])
         if pid.poll() is not None and next_line == '':
@@ -41,7 +43,7 @@ def get_mac_address(ip: ip_address) -> str:
     try:
         return _get_mac_from_arp(ip)
     except KeyError:
-        ping(ip)
+        ping(ip, count=1, sync=True)
         return _get_mac_from_arp(ip)
 
 
