@@ -8,4 +8,4 @@ __author__ = 'konsti'
 class WOLCommand(Command):
 
     def __call__(self, target: Computer):
-        execute_subprocess(['etherwake', target.macaddress])
+        execute_subprocess(['etherwake', target.mac])
