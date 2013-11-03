@@ -72,6 +72,9 @@ def get_mac_address(ip: ip_address) -> str:
 
 
 class Computer(object):
+    last_ip = None
+    last_mac = None
+
     def __repr__(self):
         return 'Computer: %(hostname)s(%(ip)s, %(mac)s)' % {'hostname': self.host, 'ip': self.ip, 'mac': self.mac}
 
