@@ -23,7 +23,8 @@ def main():
     elif args.command == 'wake':
         cmd = WOLCommand('wol')
         for name in args.name:
-            cmd(computers[name])
+            print(cmd(computers[name], sync=True))
+
     elif args.command == 'list':
         for name in computers:
             print(name)
