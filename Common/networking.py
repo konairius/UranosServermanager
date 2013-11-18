@@ -10,11 +10,11 @@ from Common.models import Command, CommandResult
 __author__ = 'konsti'
 
 
-def ping(ip: ip_address, count: int=1, sync: bool=False) -> dict:
+def ping(ip: str, count: int=1, sync: bool=False) -> dict:
     """
     Generator for a dict containing the output of ping in a usable fashion
     """
-    pid = Popen(['ping', '-c ' + str(count), str(ip)], stdout=PIPE)
+    pid = Popen(['ping', '-c ' + str(count), ip], stdout=PIPE)
     if sync:
         pid.wait()
     while True:
@@ -26,11 +26,11 @@ def ping(ip: ip_address, count: int=1, sync: bool=False) -> dict:
             yield dict(item.split('=') for item in result_string.split(' '))
 
 
-def _get_mac_from_arp(ip: ip_address) -> str:
+def _get_mac_from_arp(ip: str) -> str:
     """
     @return:standard unix encoded mac address
     """
-    pid = Popen(['arp', '-n', str(ip)], stdout=PIPE)
+    pid = Popen(['arp', '-n', ip], stdout=PIPE)
     s = pid.communicate()[0].decode(getlocale()[1])
     if not 'HWaddress' in s:
         raise KeyError('%(ip)s is not in arp Table' % {'ip': ip})
@@ -40,13 +40,13 @@ def _get_mac_from_arp(ip: ip_address) -> str:
     return mac
 
 
-def _get_mac_from_arping(ip: ip_address) -> str:
+def _get_mac_from_arping(ip: str) -> str:
     """
     Much slower than even using arp then ping and arp again,
     but it is a fallback.
     @return:standard unix encoded mac address
     """
-    pid = Popen(['arping', '-c1', str(ip)], stdout=PIPE, stderr=DEVNULL)
+    pid = Popen(['arping', '-c1', ip], stdout=PIPE, stderr=DEVNULL)
     s = pid.communicate()[0].decode(getlocale()[1])
     mac = re.search(r"(([A-F\d]{1,2}:){5}[A-F\d]{1,2})", s)
     if mac is None:
@@ -57,7 +57,7 @@ def _get_mac_from_arping(ip: ip_address) -> str:
     return mac
 
 
-def get_mac_address(ip: ip_address) -> str:
+def get_mac_address(ip: str) -> str:
     """
     @return: standard unix encoded mac address
     """
@@ -91,13 +91,13 @@ class Computer(object):
                  RuntimeWarning)
 
     @property
-    def ip(self) -> ip_address:
+    def ip(self) -> str:
         """
         Tries to give you the current ip of the host,
         if it could not be determined, the latest known ip is returned.
         """
         try:
-            self.last_ip = ip_address(gethostbyname(self.host))
+            self.last_ip = gethostbyname(self.host)
         except TimeoutError:
             pass
         return self.last_ip
@@ -112,11 +112,9 @@ class Computer(object):
 
     @property
     def status(self) -> 'UP' or 'DOWN':
-        try:
-            ping(self.ip)
+        for _ in ping(self.ip):
             return 'UP'
-        except StopIteration:
-            return 'DOWN'
+        return 'DOWN'
 
 
 class Connection(object, metaclass=ABCMeta):

@@ -57,6 +57,12 @@ class Time(object):
     def __add__(self, other: float):
         self._timestamp += other
 
+    def __sub__(self, other):
+        """
+        @return the time difference in seconds
+        """
+        return abs(self._timestamp - other.timestamp)
+
     def __eq__(self, other):
         return self._timestamp == other.timestamp
 
@@ -90,11 +96,29 @@ class CommandResult(object):
 
     def __init__(self):
         self._state = 'unknown'
+        self._message = 'not set'
 
-    def set_state(self, new_state: ['unknown', 'successful', 'failed', 'running']):
+    def __str__(self):
+        return 'Result: %(state)s\nMessage: %(message)s' % {'state': self._state, 'message': self._message}
+
+
+    @property
+    def message(self):
+        return self._message
+
+    @property
+    def state(self):
+        return self._state
+
+    @state.setter
+    def state(self, new_state: ['unknown', 'successful', 'failed', 'running']):
         if not new_state in ['unknown', 'successful', 'failed', 'running']:
             raise RuntimeError('%(state)s is not a valid State.' % {'state': new_state})
         self._state = new_state
+
+    @message.setter
+    def message(self, new_message):
+        self._message = new_message
 
 
 class Command(metaclass=ABCMeta):
@@ -127,6 +151,20 @@ class Command(metaclass=ABCMeta):
     @property
     def name(self):
         return self._name
+
+
+class ExecutableCommand(Command):
+    """
+    This Command type executes an executable.
+    """
+
+    def __init__(self, name: str, exe: str, arg: list):
+        self.exe = exe
+        self.arg = arg
+        super().__init__(name)
+
+    def __call__(self, computer, additional_args=list(), sync=False) -> CommandResult:
+        pass
 
 
 class Job(metaclass=ABCMeta):
@@ -175,3 +213,34 @@ class RecurringJob(Job):
                 return Time.never()
             time += self._interval
         return time
+
+
+class Serializable(metaclass=ABCMeta):
+    """
+    Baseclass for a object that can be saved to the database
+    """
+
+    @property
+    def base_name(self) -> str:
+        """
+        @return: the basename of the class, the collection will be called like this
+        """
+        return self.__name__
+
+    @property
+    def serial(self) -> dict:
+        """
+        By default just the __dict__ object, but it can be any dict that is used by from_serial()
+        to recreate the object.
+        @return: the dict used to recreate the object from serialized data
+        """
+        return self.__dict__
+
+    @classmethod
+    @abstractmethod
+    def from_serial(cls, serial: dict):
+        """
+        @param serial: the dict create by the "serial" property
+        @return: an instance of the object
+        """
+        pass
