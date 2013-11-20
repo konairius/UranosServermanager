@@ -46,3 +46,6 @@ class User(object):
 
     def remove_permission(self, permission):
         self._permission_map[permission] = False
+
+    def can_do(self, permission):
+        return self._permission_map[permission]

@@ -19,5 +19,3 @@ class WOLCommand(Command):
             result.state = 'successful'
         result.message = 'Ping returned after %(time)s seconds' % {'time': str(Time.now() - start)}
         return result
-
-
