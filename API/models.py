@@ -6,7 +6,7 @@ __author__ = 'konsti'
 class User(object):
     _latest_id = 0
     _users = dict()
-    _permission_map = defaultdict(False)
+    _permission_map = defaultdict(bool)
 
     #noinspection PyAttributeOutsideInit
     @classmethod

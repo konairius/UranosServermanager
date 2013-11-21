@@ -1,7 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from locale import getlocale
 from subprocess import Popen, PIPE
-from Common.networking import Computer
 from Common.utils import get_subclasses, Time, execute_subprocess
 
 __author__ = 'konsti'
@@ -118,7 +117,7 @@ class WOLCommand(Command):
         """
         return WOLCommand
 
-    def __call__(self, target: Computer, sync=False, timeout=100) -> CommandResult:
+    def __call__(self, target, sync=False, timeout=100) -> CommandResult:
         execute_subprocess(['etherwake', target.mac])
         result = CommandResult()
         start = Time.now()
