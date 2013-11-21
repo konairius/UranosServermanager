@@ -1,7 +1,8 @@
 from abc import ABCMeta, abstractmethod
 from locale import getlocale
 from subprocess import Popen, PIPE
-from Common.utils import get_subclasses, Time
+from Common.networking import Computer
+from Common.utils import get_subclasses, Time, execute_subprocess
 
 __author__ = 'konsti'
 
@@ -105,3 +106,28 @@ class ExecuteCommand(Command):
             result.message += pid.stdout.read().decode(getlocale()[1])
         return result
 
+
+class WOLCommand(Command):
+    @classmethod
+    def from_json(cls, json: dict):
+        """\
+        @param json: as WOLCommand has only static members this can be empty, it is not parsed:
+        {
+        }
+        @return: an instance of the command described in json
+        """
+        return WOLCommand
+
+    def __call__(self, target: Computer, sync=False, timeout=100) -> CommandResult:
+        execute_subprocess(['etherwake', target.mac])
+        result = CommandResult()
+        start = Time.now()
+        if sync:
+            result.state = 'failed'
+            while not target.status == 'UP' and Time.now() - start < timeout:
+                pass
+
+        if target.status == 'UP':
+            result.state = 'successful'
+        result.message = 'Ping returned after %(time)s seconds' % {'time': str(Time.now() - start)}
+        return result

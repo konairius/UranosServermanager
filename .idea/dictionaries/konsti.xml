@@ -1,15 +1,23 @@
 <component name="ProjectDictionaryState">
   <dictionary name="konsti">
     <words>
+      <w>arping</w>
       <w>autoconfig</w>
+      <w>dbname</w>
       <w>etherwake</w>
       <w>hostkey</w>
+      <w>ipaddress</w>
       <w>ipstr</w>
+      <w>msecs</w>
+      <w>musterman</w>
       <w>openssh</w>
       <w>paramiko</w>
       <w>pathext</w>
+      <w>servermanger</w>
+      <w>stdout</w>
       <w>tempfile</w>
       <w>uranos</w>
+      <w>waddress</w>
     </words>
   </dictionary>
 </component>
