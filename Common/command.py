@@ -1,52 +1,9 @@
 from abc import ABCMeta, abstractmethod
+from locale import getlocale
+from subprocess import Popen, PIPE
+from Common.utils import get_subclasses, Time
 
 __author__ = 'konsti'
-
-
-class Command(metaclass=ABCMeta):
-    """
-    Baseclass for all commands
-    """
-    _commands = dict()
-
-    def __init__(self, name: str):
-        """
-        This constructor must be called by all Child classes,
-        it is used to keep track of the known commands and
-        avoid naming issues (names have to be unique).
-        """
-        self._name = name
-        self.add_command(self)
-
-    @classmethod
-    def add_command(cls, command):
-        # It really should be Command._commands not cls._commands
-        # because commands a cached globally.
-        if command.name in Command._commands.keys():
-            raise KeyError('The Command %(name)s already exists' % {'name': command.name})
-        Command._commands[command.name] = command
-
-    @abstractmethod
-    def __call__(self, *args, **kwargs) -> CommandResult:
-        pass
-
-    @property
-    def name(self):
-        return self._name
-
-
-class ExecutableCommand(Command):
-    """
-    This Command type executes an executable.
-    """
-
-    def __init__(self, name: str, exe: str, arg: list):
-        self.exe = exe
-        self.arg = arg
-        super().__init__(name)
-
-    def __call__(self, computer, additional_args=list(), sync=False) -> CommandResult:
-        pass
 
 
 class CommandResult(object):
@@ -77,3 +34,74 @@ class CommandResult(object):
     @message.setter
     def message(self, new_message):
         self._message = new_message
+
+
+class Command(metaclass=ABCMeta):
+    """
+    Baseclass for all commands
+    """
+    _commands = dict()
+
+    @classmethod
+    @abstractmethod
+    def from_json(cls, json: dict):
+        """
+        @param json: a command description like this:
+        {
+            "type": "CommandType",
+            "args": {
+                "arg_name": "arg"
+                }
+        }
+        @return: an instance of the command described in json
+        """
+        subclasses = dict((item.__name__, item) for item in get_subclasses(cls))
+
+        try:
+            return subclasses[json['type']].from_json(json['args'])
+        except KeyError:
+            raise SyntaxError('%(type)s is not a Valid command Type' % {'type': json['type']})
+
+    @abstractmethod
+    def __call__(self, *args, **kwargs) -> CommandResult:
+        pass
+
+
+class ExecuteCommand(Command):
+    """
+    This Command type executes an executable.
+    """
+
+    @classmethod
+    def from_json(cls, json: dict):
+        """
+        @param json: a command description like this:
+        {
+        "executable": "/bin/ls",
+        "args":
+            [
+                "-l",
+                "-a"
+            ]
+        }
+        @return: an instance of the command described in json
+        """
+        return cls(json['executable'], json['args'])
+
+    def __init__(self, executable: str, args: list):
+        self.executable = executable
+        self.args = args
+
+    def __call__(self, additional_args=list(), sync=False) -> CommandResult:
+        result = CommandResult()
+        args = self.args
+        args.append(additional_args)
+        args.insert(0, self.executable)
+        pid = Popen(args, stdout=PIPE)
+        result.state = 'running'
+        result.message = 'Execution started at %(time)s\nStdout:\n' % {'time': Time.now()}
+        if sync:
+            pid.wait()
+            result.message += pid.stdout.read().decode(getlocale()[1])
+        return result
+
