@@ -1,58 +1,9 @@
 from abc import ABCMeta, abstractmethod
-from datetime import datetime
 from API.models import User
 from Common.command import CommandResult, Command
+from Common.utils import Time
 
 __author__ = 'konsti'
-
-
-class Time(object):
-    _timestamp = None
-
-    def __init__(self, timestamp: float):
-        self._timestamp = timestamp
-
-    def __str__(self):
-        return datetime.fromtimestamp(self._timestamp).isoformat()
-
-    def __repr__(self):
-        return str(self._timestamp)
-
-    def __add__(self, other: float):
-        self._timestamp += other
-
-    def __sub__(self, other):
-        """
-        @return the time difference in seconds
-        """
-        return abs(self._timestamp - other.timestamp)
-
-    def __eq__(self, other):
-        return self._timestamp == other.timestamp
-
-    def __gt__(self, other):
-        return self._timestamp > other.timestamp
-
-    def __lt__(self, other):
-        return self._timestamp < other.timestamp
-
-    def __ge__(self, other):
-        return self._timestamp >= other.timestamp
-
-    def __le__(self, other):
-        return self._timestamp <= other.timestamp
-
-    @classmethod
-    def never(cls):
-        return cls(-1)
-
-    @classmethod
-    def now(cls):
-        return cls(datetime.now().timestamp())
-
-    @property
-    def timestamp(self):
-        return self._timestamp
 
 
 class Job(metaclass=ABCMeta):
