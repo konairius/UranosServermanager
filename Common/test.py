@@ -2,7 +2,7 @@ import random
 import string
 from time import sleep
 from Common.models import User, Time, CommandResult
-from Common.untils import execute_subprocess
+from Common.utils import execute_subprocess
 from UptimeManager.models import WOLCommand
 
 __author__ = 'konsti'

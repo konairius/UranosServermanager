@@ -1,6 +1,6 @@
 from Common.models import Command, CommandResult, Time
 from Common.networking import Computer
-from Common.untils import execute_subprocess
+from Common.utils import execute_subprocess
 
 __author__ = 'konsti'
 
